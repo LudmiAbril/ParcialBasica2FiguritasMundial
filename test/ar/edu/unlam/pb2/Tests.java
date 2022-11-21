@@ -27,4 +27,13 @@ public class Tests {
 		assertNotNull(usfinal);
 	}
 
+	@Test
+	public void queUnAdministradorPuedaAgregarUnaFigurita() throws CodigoExistenteException {
+		Usuario admin=new UsuarioAdministrador("admin");
+		Sistema sistema=new Sistema("sistema-panini");
+		Figurita figu=new Figurita("ARG23", 'C', "Argentina", 1,"Messi", 100.0);
+		
+		assertTrue(((UsuarioAdministrador)admin).agregarFigurita(figu, sistema));
+	}
+	
 }
