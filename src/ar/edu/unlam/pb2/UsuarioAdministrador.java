@@ -9,9 +9,9 @@ public class UsuarioAdministrador extends Usuario {
 	}
 
 	@Override
-	Boolean agregarFigurita() {
-		// TODO Auto-generated method stub
-		return null;
+	Boolean agregarFigurita(Figurita figurita, Sistema sistema) throws CodigoExistenteException {
+	return sistema.agregarFiguritaAlStockDisponile(figurita);
+		
 	}
 
 	

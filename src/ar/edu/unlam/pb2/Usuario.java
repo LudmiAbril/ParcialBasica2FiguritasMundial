@@ -8,6 +8,6 @@ public abstract class Usuario {
 		
 	}
 	
-	abstract Boolean agregarFigurita();
+	abstract Boolean agregarFigurita(Figurita figurita, Sistema sistema) throws CodigoExistenteException;
 
 }

@@ -1,18 +1,19 @@
 package ar.edu.unlam.pb2;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 public class Sistema {
 	private String nombre;
 	private Set<Usuario>usuariosRegistrados;
-	private Set<Figurita>stockFiguritasDisponibles;
+	private Map<String,Figurita>stockFiguritasDisponibles;
 	
 	public Sistema(String nombre) {
 		this.nombre = nombre;
 		this.usuariosRegistrados=new HashSet<Usuario>();
-		this.stockFiguritasDisponibles=new TreeSet<Figurita>();
+		this.stockFiguritasDisponibles=new TreeMap<String,Figurita>();
 	}
 
 	public String getNombre() {
@@ -31,12 +32,26 @@ public class Sistema {
 		this.usuariosRegistrados = usuariosRegistrados;
 	}
 
-	public Set<Figurita> getStockFiguritasDisponibles() {
+	public Map<String,Figurita> getStockFiguritasDisponibles() {
 		return stockFiguritasDisponibles;
 	}
 
-	public void setStockFiguritasDisponibles(Set<Figurita> stockFiguritasDisponibles) {
+	public void setStockFiguritasDisponibles(Map<String,Figurita> stockFiguritasDisponibles) {
 		this.stockFiguritasDisponibles = stockFiguritasDisponibles;
+	}
+
+	public Boolean agregarFiguritaAlStockDisponile(Figurita figurita) throws CodigoExistenteException {
+		if(this.stockFiguritasDisponibles.containsKey(figurita.getCodigoDeFigurita())) {
+			throw new CodigoExistenteException();
+		}
+		return true;
+	}
+
+	public boolean figuritaDisponible(Figurita figurita) {
+		if(this.stockFiguritasDisponibles.containsValue(figurita)) {
+			return true;
+		}
+		return false;
 	}
 	
 	

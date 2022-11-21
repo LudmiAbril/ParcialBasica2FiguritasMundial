@@ -1,6 +1,6 @@
 package ar.edu.unlam.pb2;
 
-public class Figurita {
+public class Figurita implements Comparable<Figurita> {
 private String codigoDeFigurita;
 private Character LetraGrupo;
 private String seleccion;
@@ -54,6 +54,12 @@ public Double getValorDelJugadorEnElMercado() {
 
 public void setValorDelJugadorEnElMercado(Double valorDelJugadorEnElMercado) {
 	this.valorDelJugadorEnElMercado = valorDelJugadorEnElMercado;
+}
+
+@Override
+public int compareTo(Figurita o) {
+	// TODO Auto-generated method stub
+	return 0;
 }
 
 
