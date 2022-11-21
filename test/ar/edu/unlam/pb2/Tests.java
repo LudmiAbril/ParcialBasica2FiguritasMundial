@@ -8,7 +8,9 @@ public class Tests {
 
 	@Test
 	public void queSePuedaCrearUnaFigurita() {
+		Figurita figu=new Figurita("ARG23", 'C', "Argentina", 1,"Messi", 100.0);
 		
+		assertNotNull(figu);
 	}
 
 }
