@@ -1,13 +1,13 @@
 package ar.edu.unlam.pb2;
 
 public class Figurita {
-private Integer codigoDeFigurita;
+private String codigoDeFigurita;
 private Character LetraGrupo;
 private String seleccion;
 private String nombreDelJugador;
 private Double valorDelJugadorEnElMercado;
 
-public Figurita(Integer codigoDeFigurita, Character letraGrupo, String seleccion, String nombreDelJugador,
+public Figurita(String codigoDeFigurita, Character letraGrupo, String seleccion, String nombreDelJugador,
 		Double valorDelJugadorEnElMercado) {
 	this.codigoDeFigurita = codigoDeFigurita;
 	LetraGrupo = letraGrupo;
@@ -16,11 +16,11 @@ public Figurita(Integer codigoDeFigurita, Character letraGrupo, String seleccion
 	this.valorDelJugadorEnElMercado = valorDelJugadorEnElMercado;
 }
 
-public Integer getCodigoDeFigurita() {
+public String getCodigoDeFigurita() {
 	return codigoDeFigurita;
 }
 
-public void setCodigoDeFigurita(Integer codigoDeFigurita) {
+public void setCodigoDeFigurita(String codigoDeFigurita) {
 	this.codigoDeFigurita = codigoDeFigurita;
 }
 
