@@ -16,6 +16,19 @@ public class Sistema {
 		this.stockFiguritasDisponibles=new TreeMap<String,Figurita>();
 	}
 
+	public void intercambiarFiguritas(Usuario userA,Usuario userB,Figurita figuA,Figurita figuB) throws FiguritaRepetidaException, FiguritaNoDisponibleException {
+		((UsuarioFinal)userA).figuEstaPegada(figuA);
+		((UsuarioFinal)userB).figuEstaPegada(figuB) ;
+        ((UsuarioFinal)userA).figuNoDisponible(figuA);
+		((UsuarioFinal)userB).figuNoDisponible(figuB);
+        	
+		((UsuarioFinal)userA).sacarFiguStock(figuA);
+		((UsuarioFinal)userB).agregarFigurita(figuA, this);
+		((UsuarioFinal)userB).sacarFiguStock(figuB);
+		((UsuarioFinal)userA).agregarFigurita(figuB, this);
+		
+		}
+	
 	public String getNombre() {
 		return nombre;
 	}

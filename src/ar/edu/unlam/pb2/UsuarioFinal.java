@@ -15,6 +15,20 @@ public class UsuarioFinal extends Usuario {
 		this.stockFiguritas=new ArrayList<>();
 		this.album=new TreeSet<Figurita>();
 	}
+	
+	public void sacarFiguStock(Figurita figu) {
+		this.stockFiguritas.remove(figu);
+	}
+	
+	public boolean pegarFigurita(Figurita figurita) throws FiguritaRepetidaException {
+		if(this.stockFiguritas.contains(figurita)) {
+			if(this.album.add(figurita)) {
+				this.stockFiguritas.remove(figurita);
+				return true;
+			}throw new FiguritaRepetidaException();
+		} return false;
+		
+	}
 
 	@Override
 	Boolean agregarFigurita(Figurita figurita, Sistema sistema)  {
@@ -40,6 +54,19 @@ public class UsuarioFinal extends Usuario {
 
 	public void setAlbum(Set<Figurita> album) {
 		this.album = album;
+	}
+
+	public void figuEstaPegada(Figurita figuA) throws FiguritaRepetidaException {
+		if(this.album.contains(figuA)) {
+			throw new FiguritaRepetidaException();
+		}
+	}
+		
+	public void figuNoDisponible(Figurita figuA) throws FiguritaNoDisponibleException {
+		if(this.album.contains(figuA)) {
+				throw new FiguritaNoDisponibleException();
+		}
+		
 	}
 
 	
