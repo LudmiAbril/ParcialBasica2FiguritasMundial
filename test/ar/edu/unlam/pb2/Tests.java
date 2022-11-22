@@ -88,7 +88,7 @@ public class Tests {
 		
 	}
 	
-	@Test(expected = CodigoExistenteException.class)
+	@Test (expected = CodigoExistenteException.class)
 	public void queUnAdministradorNoPuedaAgregarUnaFiguritaExistente() throws CodigoExistenteException {
 		Usuario admin=new UsuarioAdministrador("admin");
 		Sistema sistema=new Sistema("sistema-panini");
@@ -97,6 +97,24 @@ public class Tests {
 		((UsuarioAdministrador)admin).agregarFigurita(figu, sistema);
 		((UsuarioAdministrador)admin).agregarFigurita(figu, sistema);
 			
+	}
+	
+	@Test
+	public void queUnUsuarioFinalSiPuedaAgregarFiguritasExistentes() throws CodigoExistenteException {
+		Usuario admin=new UsuarioAdministrador("admin");
+		Sistema sistema=new Sistema("sistema-panini");
+		Figurita figu=new Figurita("ARG23", 'C', "Argentina", 1,"Messi", 100.0);
+		((UsuarioAdministrador)admin).agregarFigurita(figu, sistema);
+	
+		Usuario usfinal=new UsuarioFinal("final");
+		
+		((UsuarioFinal)usfinal).agregarFigurita(figu, sistema);
+		((UsuarioFinal)usfinal).agregarFigurita(figu, sistema);
+		
+		Integer deseado=2;
+		Integer obtenido=((UsuarioFinal)usfinal).getStockFiguritas().size();
+		
+		assertEquals(deseado,obtenido);
 	}
 	
 	
