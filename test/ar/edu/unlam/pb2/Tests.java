@@ -117,6 +117,102 @@ public class Tests {
 		assertEquals(deseado,obtenido);
 	}
 	
+	@Test
+	public void queUnUsuarioFinalPuedaPegarUnaFigurita() throws CodigoExistenteException, FiguritaRepetidaException {
+		Usuario admin=new UsuarioAdministrador("admin");
+		Sistema sistema=new Sistema("sistema-panini");
+		Figurita figu=new Figurita("ARG23", 'C', "Argentina", 1,"Messi", 100.0);
+		((UsuarioAdministrador)admin).agregarFigurita(figu, sistema);
 	
+		Usuario usfinal=new UsuarioFinal("final");
+		
+		((UsuarioFinal)usfinal).agregarFigurita(figu, sistema);
+		((UsuarioFinal)usfinal).pegarFigurita(figu);
+		
+		Integer deseado=1;
+		Integer obtenido=((UsuarioFinal)usfinal).getAlbum().size();
+		
+		assertEquals(deseado,obtenido);
+	}
+	
+	@Test (expected = FiguritaRepetidaException.class)
+	public void queUnUsuarioFinalNoPuedaPegarUnaFiguritaRepetida() throws CodigoExistenteException, FiguritaRepetidaException {
+		Usuario admin=new UsuarioAdministrador("admin");
+		Sistema sistema=new Sistema("sistema-panini");
+		Figurita figu=new Figurita("ARG23", 'C', "Argentina", 1,"Messi", 100.0);
+		((UsuarioAdministrador)admin).agregarFigurita(figu, sistema);
+	
+		Usuario usfinal=new UsuarioFinal("final");
+		
+		((UsuarioFinal)usfinal).agregarFigurita(figu, sistema);
+		((UsuarioFinal)usfinal).agregarFigurita(figu, sistema);
+		((UsuarioFinal)usfinal).pegarFigurita(figu);
+		((UsuarioFinal)usfinal).pegarFigurita(figu);
+		
+	}
+	
+	@Test
+	public void queSePuedaRealizarElIntercambioDeFiguritasEntreDosUsuariosFinales() throws CodigoExistenteException, FiguritaRepetidaException, FiguritaNoDisponibleException {
+		Usuario admin=new UsuarioAdministrador("admin");
+		Sistema sistema=new Sistema("sistema-panini");
+		Figurita figu1=new Figurita("ARG23", 'C', "Argentina", 1,"Messi", 100.0);
+		Figurita figu2=new Figurita("ARG24", 'C', "Argentina", 1,"Tevez", 100.0);
+		((UsuarioAdministrador)admin).agregarFigurita(figu1, sistema);
+		((UsuarioAdministrador)admin).agregarFigurita(figu2, sistema);
+		
+		Usuario us1=new UsuarioFinal("finala");
+		Usuario us2=new UsuarioFinal("finalb");
+		
+		((UsuarioFinal)us1).agregarFigurita(figu1, sistema);
+		((UsuarioFinal)us2).agregarFigurita(figu2, sistema);
+		
+		sistema.intercambiarFiguritas(us1, us2, figu1, figu2);
+		
+		assertTrue(((UsuarioFinal)us1).figuDisponible(figu2));
+		assertTrue(((UsuarioFinal)us2).figuDisponible(figu1));
+		
+	}
+	
+	@Test (expected = FiguritaNoDisponibleException.class)
+	public void queNoSePuedaIntercambiarUnaFiguritaDeUnUsuarioQueNoLaTenga() throws CodigoExistenteException, FiguritaRepetidaException, FiguritaNoDisponibleException {
+		Usuario admin=new UsuarioAdministrador("admin");
+		Sistema sistema=new Sistema("sistema-panini");
+		Figurita figu1=new Figurita("ARG23", 'C', "Argentina", 1,"Messi", 100.0);
+		Figurita figu2=new Figurita("ARG24", 'C', "Argentina", 1,"Tevez", 100.0);
+		Figurita figu3=new Figurita("ARG25", 'C', "Argentina", 1,"De Paul", 100.0);
+		((UsuarioAdministrador)admin).agregarFigurita(figu1, sistema);
+		((UsuarioAdministrador)admin).agregarFigurita(figu2, sistema);
+		
+		Usuario us1=new UsuarioFinal("finala");
+		Usuario us2=new UsuarioFinal("finalb");
+		
+		((UsuarioFinal)us1).agregarFigurita(figu1, sistema);
+		((UsuarioFinal)us2).agregarFigurita(figu2, sistema);
+		
+		sistema.intercambiarFiguritas(us1, us2, figu1, figu3);
+		
+	}
+	
+	@Test (expected = FiguritaNoDisponibleException.class)
+	public void queNoSePuedaIntercambiarUnaFiguritaDeUnUsuarioQueYaLaHayaPegado() throws CodigoExistenteException, FiguritaRepetidaException, FiguritaNoDisponibleException {
+		Usuario admin=new UsuarioAdministrador("admin");
+		Sistema sistema=new Sistema("sistema-panini");
+		Figurita figu1=new Figurita("ARG23", 'C', "Argentina", 1,"Messi", 100.0);
+		Figurita figu2=new Figurita("ARG24", 'C', "Argentina", 1,"Tevez", 100.0);
+		Figurita figu3=new Figurita("ARG25", 'C', "Argentina", 1,"De Paul", 100.0);
+		((UsuarioAdministrador)admin).agregarFigurita(figu1, sistema);
+		((UsuarioAdministrador)admin).agregarFigurita(figu2, sistema);
+		
+		Usuario us1=new UsuarioFinal("finala");
+		Usuario us2=new UsuarioFinal("finalb");
+		
+		((UsuarioFinal)us1).agregarFigurita(figu1, sistema);
+		((UsuarioFinal)us2).agregarFigurita(figu2, sistema);
+		
+		((UsuarioFinal)us1).pegarFigurita(figu1);
+		
+		sistema.intercambiarFiguritas(us1, us2, figu1, figu3);
+		
+	}
 	
 }

@@ -17,14 +17,12 @@ public class Sistema {
 	}
 
 	public void intercambiarFiguritas(Usuario userA,Usuario userB,Figurita figuA,Figurita figuB) throws FiguritaRepetidaException, FiguritaNoDisponibleException {
-		((UsuarioFinal)userA).figuEstaPegada(figuA);
-		((UsuarioFinal)userB).figuEstaPegada(figuB) ;
-        ((UsuarioFinal)userA).figuNoDisponible(figuA);
-		((UsuarioFinal)userB).figuNoDisponible(figuB);
+        ((UsuarioFinal)userA).figuDisponible(figuA);
+		((UsuarioFinal)userB).figuDisponible(figuB);
         	
 		((UsuarioFinal)userA).sacarFiguStock(figuA);
-		((UsuarioFinal)userB).agregarFigurita(figuA, this);
 		((UsuarioFinal)userB).sacarFiguStock(figuB);
+		((UsuarioFinal)userB).agregarFigurita(figuA, this);
 		((UsuarioFinal)userA).agregarFigurita(figuB, this);
 		
 		}

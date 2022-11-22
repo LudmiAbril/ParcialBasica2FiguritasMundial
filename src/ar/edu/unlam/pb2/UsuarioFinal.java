@@ -62,10 +62,11 @@ public class UsuarioFinal extends Usuario {
 		}
 	}
 		
-	public void figuNoDisponible(Figurita figuA) throws FiguritaNoDisponibleException {
-		if(this.album.contains(figuA)) {
-				throw new FiguritaNoDisponibleException();
-		}
+	public Boolean figuDisponible(Figurita figuA) throws FiguritaNoDisponibleException {
+		if(this.stockFiguritas.contains(figuA)) {
+			return true;
+				
+		} throw new FiguritaNoDisponibleException();
 		
 	}
 
