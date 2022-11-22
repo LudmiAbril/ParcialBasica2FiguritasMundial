@@ -33,7 +33,13 @@ public class Tests {
 		Sistema sistema=new Sistema("sistema-panini");
 		Figurita figu=new Figurita("ARG23", 'C', "Argentina", 1,"Messi", 100.0);
 		
-		assertTrue(((UsuarioAdministrador)admin).agregarFigurita(figu, sistema));
+		((UsuarioAdministrador)admin).agregarFigurita(figu, sistema);
+		
+		Integer esperado=1;
+		Integer obtenido=sistema.getStockFiguritasDisponibles().size();
+		
+		assertEquals(esperado,obtenido);
+		
 	}
 	
 	@Test
@@ -44,7 +50,12 @@ public class Tests {
 		((UsuarioAdministrador)admin).agregarFigurita(figu, sistema);
 		
 		Usuario usfinal=new UsuarioFinal("final");
-		assertTrue(((UsuarioFinal)usfinal).agregarFigurita(figu, sistema));
+		((UsuarioFinal)usfinal).agregarFigurita(figu, sistema);
+		Integer esperado=1;
+		Integer obtenido=((UsuarioFinal)usfinal).getStockFiguritas().size();
+		
+		assertEquals(esperado,obtenido);
+		
 	}
 	
 	
