@@ -22,7 +22,7 @@ public class Tests {
 	
 	@Test
 	public void queSePuedaCrearUnUsuarioFinal() {
-        Usuario usfinal =new UsuarioFinal("admin");
+        Usuario usfinal =new UsuarioFinal("final");
 		
 		assertNotNull(usfinal);
 	}
@@ -35,5 +35,18 @@ public class Tests {
 		
 		assertTrue(((UsuarioAdministrador)admin).agregarFigurita(figu, sistema));
 	}
+	
+	@Test
+	public void queUnUsuarioFinalPuedaAgregarUnaFigurita() throws CodigoExistenteException {
+		Usuario admin=new UsuarioAdministrador("admin");
+		Sistema sistema=new Sistema("sistema-panini");
+		Figurita figu=new Figurita("ARG23", 'C', "Argentina", 1,"Messi", 100.0);
+		((UsuarioAdministrador)admin).agregarFigurita(figu, sistema);
+		
+		Usuario usfinal=new UsuarioFinal("final");
+		assertTrue(((UsuarioFinal)usfinal).agregarFigurita(figu, sistema));
+	}
+	
+	
 	
 }

@@ -57,6 +57,7 @@ public class Sistema {
 		if(this.stockFiguritasDisponibles.containsKey(figurita.getCodigoDeFigurita())) {
 			throw new CodigoExistenteException();
 		}
+		this.stockFiguritasDisponibles.put(figurita.getCodigoDeFigurita(), figurita);
 		return true;
 	}
 
